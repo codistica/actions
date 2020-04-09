@@ -1,0 +1,17 @@
+name: Comment
+description: Creates a new comment in a issue or pull request
+
+inputs:
+  number:
+    description: The issue or pull request number
+    required: true
+  comment:
+    description: The comment message
+    required: true
+  token:
+    description: A GitHub access token
+    required: true
+
+runs:
+  using: node12
+  main: index.js

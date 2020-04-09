@@ -1,0 +1,17 @@
+name: Label
+description: Creates a new label on a issue or pull request
+
+inputs:
+  number:
+    description: The Issue or pull request number
+    required: true
+  labels:
+    description: The labels to be added
+    required: true
+  token:
+    description: A GitHub access token
+    required: true
+
+runs:
+  using: node12
+  main: index.js
