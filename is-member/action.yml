@@ -1,0 +1,24 @@
+name: Is Member
+description: Checks if user is part of the organization
+
+inputs:
+  username:
+    required: true
+    description: user's username
+  org:
+    required: true
+    description: organization name
+  token:
+    description: A GitHub access token
+    required: true
+  throwError:
+    description: Boolean to throw error if not a member (false by default)
+    required: false
+
+outputs:
+  result:
+    description: 1 if is member, 0 otherwise
+
+runs:
+  using: node12
+  main: index.js
