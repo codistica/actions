@@ -1,0 +1,22 @@
+name: Tag
+description: Releases tags for a monorepo
+
+inputs:
+  token:
+    description: A Github access token
+    required: true
+  monorepo-name:
+    description: Monorepo name, with @ included
+    required: true
+  ckeck-only:
+    description: Option to do not put tags
+    required: false
+
+outputs:
+  tags:
+    description: Tags that would be created
+
+
+runs:
+  using: node12
+  main: index.js
