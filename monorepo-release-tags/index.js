@@ -1,5 +1,6 @@
 const cp = require('child_process');
 const path = require('path');
+const fs = require('fs');
 
 cp.execSync(`cd ${__dirname}; yarn install`);
 
@@ -39,18 +40,19 @@ const getDateTag = () => {
 
     const oct = new github.GitHub(token);
 
-    const changedPackages = cp.execSync('yarn run --silent lerna list').toString().trim().split('\n');
-
+    const packagesPath = path.resolve(process.cwd(), './packages');
+    const packageDirnames = fs.readdirSync(packagesPath);
     let tags = [];
     let exposeTags = [];
 
-    changedPackages.forEach((changedPackage) => {
+    packageDirnames.forEach((packageDirname) => {
         const jsonPath = path.resolve(
-            './packages',
-            changedPackage.replace(`${monorepoName}/`, ''),
-            'package.json'
+            packagesPath,
+            packageDirname,
+            './package.json'
         );
-        tags.push(`${changedPackage}@${require(jsonPath).version}`)
+        const json = require(path.relative(__dirname, jsonPath));
+        tags.push(`${json.name}@${json.version}`)
     });
 
     cp.execSync('git fetch --tags');
